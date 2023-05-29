@@ -2,8 +2,8 @@
 --@author discord.gg/6Q5NnHQTrh // kekobka // STEAM_0:0:186583728
 
 
-local vLabel = require("./label.txt")
-local E = require("./element.txt")
+local vLabel = require("./label.lua")
+local E = require("./element.lua")
 E:include(MIXIN)
 
 local element = class("vCheckbox",E)

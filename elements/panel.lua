@@ -2,7 +2,7 @@
 --@author discord.gg/6Q5NnHQTrh // kekobka // STEAM_0:0:186583728
 
 
-local E = require("./element.txt")
+local E = require("./element.lua")
 E:include(MIXIN)
 
 local element = class("vPanel",E)

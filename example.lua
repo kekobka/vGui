@@ -149,8 +149,8 @@ local function createExample(gui,main,res,resy)
 
 end
 if CLIENT then
-    --@include ./vgui.txt
-    local vGui = require('./vgui.txt')
+    --@include ./vgui.lua
+    local vGui = require('./vgui.lua')
 
     
     

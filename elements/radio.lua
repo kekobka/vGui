@@ -2,7 +2,7 @@
 --@author discord.gg/6Q5NnHQTrh // kekobka // STEAM_0:0:186583728
 
 
-local E = require("./checkbox.txt")
+local E = require("./checkbox.lua")
 local element = class("vRadio", E)
 
 function element:initialize(gui)

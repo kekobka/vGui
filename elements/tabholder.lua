@@ -2,7 +2,7 @@
 --@author discord.gg/6Q5NnHQTrh // kekobka // STEAM_0:0:186583728
 
 
-local E = require("./label.txt")
+local E = require("./label.lua")
 E:include(MIXIN)
 
 local element = class("vTabHolder",E)

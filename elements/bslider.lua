@@ -2,8 +2,8 @@
 --@author discord.gg/6Q5NnHQTrh // kekobka // STEAM_0:0:186583728
 
 
-local vButton = require("./button.txt")
-local E = require("./label.txt")
+local vButton = require("./button.lua")
+local E = require("./label.lua")
 E:include(MIXIN)
 
 local element = class("vButtonSlider",E)

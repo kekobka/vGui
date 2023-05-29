@@ -92,9 +92,9 @@ http.get =  queue(function(...)
 local vGui = class("vgui")
 --@includedir ./elements
 --@includedir ./skins
---@include ./styles.txt
+--@include ./styles.lua
 
-require("./styles.txt")
+require("./styles.lua")
 
 local SKINS = {}
 do 
@@ -106,7 +106,7 @@ do
 end
 local ELEMENTS = {}
 for path, data in pairs(requiredir("./elements")) do
-    ELEMENTS[string.lower(string.match(path, "/(%w+).txt$"))] = data
+    ELEMENTS[string.lower(string.match(path, "/(%w+).lua$"))] = data
 end
 
 
