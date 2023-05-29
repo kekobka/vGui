@@ -158,23 +158,6 @@ if CLIENT then
     local gui = vGui:new("hud")
     gui:setVisible(true)
     res,resy = gui:getResolution()
-    
-    PANEL = {}
-    PANEL.ColorIdle = Color(255, 0, 0)
-    PANEL.ColorHovered = Color(0, 255, 0)
-    
-    
-    function PANEL:paint(x, y, w, h)  
-        local color = self.ColorIdle
-    
-        if self:isHovered() then
-            color = self.ColorHovered
-        end
-    
-        render.setColor(color)
-        render.drawRect(x, y, w, h)
-    end
-    vGui.register("button",PANEL,"button")
 
     local mainmenu = gui:add("panel")
     mainmenu:setTitle("example")
