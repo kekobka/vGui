@@ -1,7 +1,6 @@
---@name styles
---@author discord.gg/6Q5NnHQTrh // kekobka // STEAM_0:0:186583728
---@shared
-
+-- @name styles
+-- @author discord.gg/6Q5NnHQTrh // kekobka // STEAM_0:0:186583728
+-- @shared
 --[[
 
             ██╗░░██╗███████╗██╗░░██╗░█████╗░██████╗░██╗░░██╗░█████╗░
@@ -11,105 +10,90 @@
             ██║░╚██╗███████╗██║░╚██╗╚█████╔╝██████╦╝██║░╚██╗██║░░██║
             ╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝░╚════╝░╚═════╝░╚═╝░░╚═╝╚═╝░░╚═╝
 
-]]--
-
+]] --
 STYLES = {
-    label = {};
-    panel = {};
-    button = {};
-    slider = {};
-    checkbox = {};
-    menu = {};
-    shape = {};
-    textentry = {};
+    label = {},
+    panel = {},
+    button = {},
+    slider = {},
+    checkbox = {},
+    menu = {},
+    shape = {},
+    textentry = {}
 }
 
 local fonts = {}
 
 local ColorScheme = {
-    text = {
-        Color(234,231,220),
-        disabled = Color(100, 100, 100)
-    };
+    text = {Color(234, 231, 220), disabled = Color(100, 100, 100)},
     bg = {
         Color(47, 68, 84),
         used = Color(147, 168, 184),
         disabled = Color(32, 32, 32)
-    };
+    },
     border = {
         Color(200, 255, 200, 10),
         hover = Color(200, 255, 200, 30),
         used = Color(200, 255, 200, 90),
         disabled = Color(32, 32, 32)
-    };
-    header = {
-        Color(28, 51, 52)
-    };
+    },
+    header = {Color(28, 51, 52)},
     mark = {
-        Color(147, 168, 184);
-        used = Color(147, 168, 184);
-        disabled = Color(4, 6, 8);
-    };
+        Color(147, 168, 184),
+        used = Color(147, 168, 184),
+        disabled = Color(4, 6, 8)
+    }
 }
 
 if CLIENT then
     local fonts = {
-        main = {str = render.createFont("Roboto", 255, 400, true); size = 255};
-        mainBold = {str = render.createFont("Roboto", 255, 700, true); size = 255};
-        icons = {str = render.createFont("Segoe MDL2 Assets", 128, 400, true, false, false, false, false, true); size = 128};
-        textentry = {str = render.createFont("Roboto", 16, 400, true); size = 16};
+        main = {str = render.createFont("Roboto", 255, 400, true), size = 255},
+        mainBold = {
+            str = render.createFont("Roboto", 255, 700, true),
+            size = 255
+        },
+        icons = {
+            str = render.createFont("Segoe MDL2 Assets", 128, 400, true, false,
+                                    false, false, false, true),
+            size = 128
+        },
+        textentry = {
+            str = render.createFont("Roboto", 16, 400, true),
+            size = 16
+        }
     }
 
-    function STYLES.label:included(target)
+    function STYLES.label:included(target) target:setColorScheme(ColorScheme) end
+
+    function STYLES.panel:included(target) target:setColorScheme(ColorScheme) end
+
+    function STYLES.button:included(target)
 
         target:setColorScheme(ColorScheme)
 
     end
-    
-    function STYLES.panel:included(target)
-        
-        target:setColorScheme(ColorScheme)
-        
-    end 
-    
-    function STYLES.button:included(target)
-        
-        target:setColorScheme(ColorScheme)
-        
-    end    
-    
+
     function STYLES.slider:included(target)
-        
+
         target:setColorScheme(ColorScheme)
-        
-    end    
+
+    end
 
     function STYLES.checkbox:included(target)
-        
-        target:setColorScheme(ColorScheme)
-        
-    end  
-    function STYLES.menu:included(target)
-        
-        target:setColorScheme(ColorScheme)
-        
-    end  
-    function STYLES.shape:included(target)
-        
-        target:setColorScheme(ColorScheme)
-        
-    end 
-    function STYLES.textentry:included(target)
-        
-        target:setColorScheme(ColorScheme)
-        
-    end  
 
-    
-    
+        target:setColorScheme(ColorScheme)
+
+    end
+    function STYLES.menu:included(target) target:setColorScheme(ColorScheme) end
+    function STYLES.shape:included(target) target:setColorScheme(ColorScheme) end
+    function STYLES.textentry:included(target)
+
+        target:setColorScheme(ColorScheme)
+
+    end
 
 end
-    
+
 MIXIN = {}
 
 accessorFunc(MIXIN, "_radius", "Radius", 0)
@@ -151,79 +135,7 @@ function MIXIN:setRoundedCorners(c1, c2, c3, c4)
 end
 
 function MIXIN:getRoundedCorners()
-    return self._roundTopLeftCorner, self._roundTopRightCorner, self._roundBottomRightCorner, self._roundBottomLeftCorner
+    return self._roundTopLeftCorner, self._roundTopRightCorner,
+           self._roundBottomRightCorner, self._roundBottomLeftCorner
 end
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

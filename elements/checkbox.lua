@@ -26,7 +26,7 @@ function element:setChecked(state)
 end
 
 function element:addLabel(title)
-    
+    if self.label then return self.label end
     self.label = self.gui:add("label",self)//vLabel:new(self.gui)
     self.label:setFont(self.gui.skin.fonts["mainBold"])
     self.label:setPos(16, 0)
@@ -48,6 +48,7 @@ function element:getLabel()
     return self.label:getText()
 end
 function element:addAnimation(...)
+    if not self.label then return end
     return self.label:addAnimation(...)
 end
 
