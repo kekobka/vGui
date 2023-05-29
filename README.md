@@ -7,6 +7,10 @@
 ### Components
 >- [GUI functions](#gui)
 >- [Element](/docs/element.md)
+>- [Label](/docs/label.md)
+>- [Button](/docs/button.md)
+>- [Checkbox](/docs/checkbox.md)
+>- [Panel](/docs/panel.md)
 ---
 
 ## Short example
