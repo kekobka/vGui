@@ -36,7 +36,7 @@ Other components inherit these attributes
 
 ---
 ## STUB
-
+Only for element creator
 
 >- **void** element:**performLayout(** *number w*, *number h* **)**
 >- **void** element:**think()**
