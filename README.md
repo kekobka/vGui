@@ -6,7 +6,7 @@
 
 ### Components
 >- [GUI functions](#gui)
->- [Element](#element)
+>- [Element](#docs/element.md)
 ---
 
 ## Short example
@@ -61,10 +61,4 @@ button:dock(FILL)
 >- **element** gui:**add(** *string classname*, *parent element or nil*, *function callback or nil* **)** -- creating new element
 >- **element** gui:**create(** *string classname*, *parent element or nil*, *function callback or nil* **)** -- This is used internally - although you're able to use it you probably shouldn't.
 >- **void** gui:**setSkin(** *string skin name* **)** -- set skin to all elements ( get skin from **./skins** )
-
-
----
-## Element
-[element](docs/element.md)
----
 
