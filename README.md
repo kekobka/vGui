@@ -11,6 +11,7 @@
 >- [Button](/docs/button.md)
 >- [Checkbox](/docs/checkbox.md)
 >- [Panel](/docs/panel.md)
+>- and more
 ---
 
 ## Short example
