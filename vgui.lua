@@ -115,7 +115,6 @@ function vGui:initialize(device)
     local _root, _resx, _resy
     local elements = {}
     self.initialized = false
-    self._allocated = {}
     self.matrix = Matrix()
     self.skin = self.class.static.skins["default"]
     local function set_element(element,code)
@@ -160,10 +159,7 @@ function vGui:initialize(device)
     function self:isVisible()
         return _root:isVisible()
     end
-    
-    for _,co in ipairs(self._allocated) do
-        coroutine.resume(co)
-    end
+
     local SCALE = (_resx / 1366)
     if device == "hud" then
         enableHud(owner(),true)
@@ -280,12 +276,12 @@ function vGui.error(...)
     print(Color(255, 100, 100, 255), "[GUI] ", Color(255, 255, 255, 255), ...)
 end
 
-function vGui.httpget(...)
+function vGui.httpget(url,callbackSuccess,callbackFail,headers)
     if CLIENT and hasPermission("notification")  then 
         notification.addLegacy("[GUI] DOWNLOAD", NOTIFY.HINT, 3)
     end
-    
-    http.get(...)
+
+    http.get(url,function(...) callbackSuccess(...) end,function(...) vGui.error("HTTP",...) callbackFail() end,headers)
 end
 function vGui.print(...)
     print(Color(100, 255, 100, 255), "[GUI] ", Color(255, 255, 255, 255), ...)
@@ -306,14 +302,6 @@ function vGui:getCursor()
     else
         return input.getCursorPos()
     end
-end
-
-function vGui:_allocate(fn)
-    if self.initialized then
-        return fn()
-    end
-    local co = coroutine.create(fn)
-    table.insert(self._allocated,co)
 end
 
 function vGui:add(name,parent,cl)
