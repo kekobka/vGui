@@ -52,6 +52,9 @@ panel:center()
 local button = gui:add("button",panel)
 button:setText("FILL")
 button:dock(FILL)
+function button:onClick()
+    print("clicked!")
+end
 ```
 ---
 
