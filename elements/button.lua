@@ -58,7 +58,7 @@ function element:paint(x, y, w, h)
         render.drawRectOutline(x, y, w, h,2)
     end
     if self.lastx and self.lasty then
-        self.aprogress = math.min(self.aprogress + 0.1,1)
+        self.aprogress = math.min(self.aprogress + 4 * timer.frametime(),1)
         local R = math.remap(math.easeInSine(self.aprogress), 0, 1, 0, w+h)
         render.drawFilledCircle(self.lastx,self.lasty,R)
         if self.aprogress == 1 then 
