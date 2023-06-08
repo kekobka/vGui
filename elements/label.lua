@@ -57,6 +57,7 @@ function element:initialize(gui)
     self.wmult = 1
     self.hmult = 1
     self._align = 1
+    self._aligny = 1
     self:setFont(self.gui.skin.fonts["main"])
     self:setText("Label")
     local w, h = self:getTextSize()
@@ -76,7 +77,7 @@ function element:paint(x, y, w, h)
 
     render.setFont(self:getFont())
     render.setColor(self:getColorFromScheme("text"))
-    render.drawSimpleText(0, 0, self:getText(), self._align, self._align)
+    render.drawSimpleText(0, 0, self:getText(), self._align, self._aligny)
 
     render.popMatrix(self.textmatrix)
 end
@@ -107,7 +108,10 @@ end
 function element:getText() return self._text end
 
 function element:getFont() return self._font end
-function element:setAlign(v) self._align = v end
+function element:setAlign(x,y) 
+    self._align = x
+    self._aligny = y and y or x
+end
 
 function element:getTextSize() return self._textWidth, self._textHeight end
 function element:addAnimation(target, speed, rate, timeout, fn)

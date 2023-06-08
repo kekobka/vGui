@@ -7,6 +7,8 @@ E:include(MIXIN)
 
 local element = class("vButton",E)
 
+element.static.accessorFunc(element, "m_bDrawBorder", "DrawBorder", true)
+
 function element:initialize(gui)
     E.initialize(self,gui)
     
@@ -55,9 +57,10 @@ function element:paint(x, y, w, h)
     else
         render.setColor(self:getColorFromScheme("bg"))
         render.drawRect(x, y, w, h)
-        
-        render.setColor(self:getColorFromScheme("border"))
-        render.drawRectOutline(x, y, w, h,2)
+        if self:getDrawBorder() then
+            render.setColor(self:getColorFromScheme("border"))
+            render.drawRectOutline(x, y, w, h, 2)
+        end
     end
     if self.lastx and self.lasty then
         self.aprogress = math.min(self.aprogress + 4 * timer.frametime(),1)
@@ -68,13 +71,13 @@ function element:paint(x, y, w, h)
             self.aprogress = 0
         end
     end
-    self.textmatrix:setTranslation(Vector(x+(self._align == 1 and w/2 or 0),y+(self._align == 1 and h/2 or 0)))
+    self.textmatrix:setTranslation(Vector(x+(self._align == 1 and w/2 or 0),y+(self._aligny == 1 and h/2 or 0)))
     self.textmatrix:setScale(Vector(self._textW/255*2,self._textH/255*2,0))
     render.pushMatrix(self.textmatrix)
     
     render.setFont(self:getFont())
     render.setColor(self:getColorFromScheme("text"))
-    render.drawSimpleText(0, 0, self:getText(),self._align,self._align)
+    render.drawSimpleText(0, 0, self:getText(),self._align,self._aligny)
     
     render.popMatrix(self.textmatrix)
 end

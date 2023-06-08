@@ -45,15 +45,18 @@ function element:initialize(gui)
 
     if self.getFonts then self.fonts = self:getFonts() end
 
-    self._parent = nil
-    self._firstChild = nil
-    self._prevSibling = nil
-    self._nextSibling = nil
 
-    self._dockMargin = {0, 0, 0, 0}
-    self._dockPadding = {0, 0, 0, 0}
     self._lock = nil
+    self.m_bMouseEnabled = true
 end
+
+element._parent = nil
+element._firstChild = nil
+element._prevSibling = nil
+element._nextSibling = nil
+
+element._dockMargin = {0, 0, 0, 0}
+element._dockPadding = {0, 0, 0, 0}
 
 function element:AnimationThink(f) return ANIMATIONTHINK(f) end
 
@@ -69,6 +72,17 @@ function element:setSize(w, h)
     self:invalidateLayout()
 end
 
+function element:setWide(w)
+    self:setW(w)
+    self:invalidateLayout()
+end
+
+function element:setTall(h)
+    self:setH(h)
+    self:invalidateLayout()
+end
+element.getTall = element.getH
+element.getWide = element.getW
 function element:getSize() return self:getW(), self:getH() end
 
 function element:setPos(x, y)
@@ -118,6 +132,19 @@ function element:getAbsolutePos(x, y)
 
     return x, y
 end
+element.LocalToScreen = element.getAbsolutePos
+
+function element:centerVertical(frac) 
+    frac = frac or 0.5
+    self:setY(self:getParent():getH() * frac - self:getH()/2)
+end
+function element:alignRight(offset) 
+    offset = offset or 0.5
+    self:setX(self:getParent():getW() - self:getW() - offset)
+end
+function element:setMouseInputEnabled(b) 
+    self.m_bMouseEnabled = b
+end
 
 function element:setParent(parent) self._parent = parent end
 
@@ -151,6 +178,11 @@ function element:isLocked() return self._lock end
 function element:remove()
     self:setVisible(false)
     self:setEnabled(false)
+    -- self:toAllChild(self.remove)
+    if self:hasParent() then
+        self:getParent():removeChild(self)
+    end
+    
 end
 function element:setSkin(skin)
     self:setColorScheme(skin.ColorScheme, true)
@@ -171,6 +203,24 @@ function element:addChild(child)
         temp._nextSibling = child
         child._prevSibling = temp
     end
+
+end
+
+function element:removeChild(child)
+
+    if not child then return end
+
+    child:setParent(nil)
+    -- if self._firstChild == child then
+    --     self._firstChild = nil
+    -- else
+        local prev = child._prevSibling or self
+        local next = child._nextSibling
+        -- if not prev then return end
+        -- prev._nextSibling = next
+        -- next._prevSibling = prev
+
+    -- end
 
 end
 
@@ -302,6 +352,8 @@ function element:getColorScheme() return self._colorScheme or {} end
 
 function element:getFonts() return self.fonts end
 
+function element:notChangeColorBorderOnHover() self._changeColorBorderOnHover = true  end
+
 function element:getColorFromScheme(key)
 
     local scheme = self:getColorScheme()[key]
@@ -311,7 +363,7 @@ function element:getColorFromScheme(key)
             color = scheme["disabled"] or scheme[1]
         elseif self:isUsed() then
             color = scheme["used"] or scheme[1]
-        elseif self:isHovered() then
+        elseif self:isHovered() and not self._changeColorBorderOnHover then
             color = scheme["hover"] or scheme[1]
         else
             color = scheme[1]
@@ -428,7 +480,7 @@ end
 function element:_onMousePressed(x, y, key, keyName)
 
     if self:cursorIntersect(x, y) and self:isEnabled() and self:isVisible() and
-        not self:isLocked() then
+        not self:isLocked() and self.m_bMouseEnabled then
         local element =
             self:_postEventToAll("MOUSE_PRESSED", x, y, key, keyName)
 
@@ -448,7 +500,7 @@ end
 
 function element:_onMouseReleased(x, y, key, keyName)
     if self:cursorIntersect(x, y) and self:isEnabled() and self:isVisible() and
-        not self:isLocked() then
+        not self:isLocked() and self.m_bMouseEnabled then
         local element = self:_postEventToAll("MOUSE_RELEASED", x, y, key,
                                              keyName)
 
@@ -461,7 +513,7 @@ function element:_onMouseReleased(x, y, key, keyName)
 end
 function element:_onMouseWheeled(x, y, key, keyName)
     if self:cursorIntersect(x, y) and self:isEnabled() and self:isVisible() and
-        not self:isLocked() then
+        not self:isLocked() and self.m_bMouseEnabled then
         local element =
             self:_postEventToAll("MOUSE_WHEELED", x, y, key, keyName)
 
@@ -503,6 +555,10 @@ end
 function element:_onButtonPressed(key, keyName) end
 
 function element:_onButtonReleased(key, keyName) end
+
+function element:add(classname)
+    return self.gui:add(classname, self)
+end
 
 -- STUB
 

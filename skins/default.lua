@@ -19,6 +19,7 @@ SKIN = {
         bg = {
             Color(47, 68, 84),
             used = Color(147, 168, 184),
+            hover = Color(56, 81, 100),
             disabled = Color(32, 32, 32)
         };
         border = {

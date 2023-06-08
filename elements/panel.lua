@@ -9,7 +9,7 @@ local element = class("vPanel",E)
 element.accessorFunc(element, "_parentLock", "ParentLock", false)
 function element:initialize(gui)
     E.initialize(self,gui)
-    
+    self:notChangeColorBorderOnHover()
     self.title = self.gui:add("label",self)
     self.title:setFont(self.gui.skin.fonts["mainBold"])
     self.title:setPos(12, 8)
