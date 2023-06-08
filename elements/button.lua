@@ -16,6 +16,8 @@ function element:initialize(gui)
     self.aprogress = 0
 end
 
+element.setLabel = element.setText
+
 function element:onMousePressed(x, y, key, keyName)
     if key == MOUSE.MOUSE1 or key == MOUSE.MOUSE2 and not self._lock then
         self:setUsed(true)
