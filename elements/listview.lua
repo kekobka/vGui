@@ -22,6 +22,16 @@ function element:initialize(gui)
         self._offsetH = value
         self:invalidateLayout()
     end
+
+end
+
+function element:onMouseWheeled(x, y, key, keyName)
+    if key == MOUSE.MWHEELUP then
+        self._offsetH = self._offsetH + 0.01
+    else
+        self._offsetH = self._offsetH - 0.01
+    end
+    self:invalidateLayout()
 end
 
 function element:addColumn( column, position )
@@ -41,6 +51,14 @@ function element:addLine( id, text )
             el:setEnabled(true)
         end
         el:setEnabled(false)
+    end
+    function el.onMouseWheeled(el, x, y, key, keyName)
+        if key == MOUSE.MWHEELUP then
+            self._offsetH = self._offsetH + 0.01
+        else
+            self._offsetH = self._offsetH - 0.01
+        end
+        self:invalidateLayout()
     end
     self._taboffsetH = self._taboffsetH + 24        
     if el:getY() + el:getH() > self:getH() - 24 then
@@ -91,6 +109,7 @@ end
 
 function element:performLayout(w, h)
     if not self.scroll then return end
+    self._offsetH = math.clamp(self._offsetH, 0, 1)
     self.scroll:dock(RIGHT, true)
     local offset = -self._offsetH * math.max(0, ( self._taboffsetH - h + 24 ) )
     for idx, el in pairs(self._tabs) do

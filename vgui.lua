@@ -1,7 +1,7 @@
 -- @name gui
 -- @author valera 41 // kekobka // STEAM_0:0:186583728
 -- @shared
-if player() ~= owner() then return end
+-- if player() ~= owner() then return end
 
 local function isURL(str)
     local _1, _2, prefix = str:find("^(%w-):")
@@ -291,7 +291,7 @@ function vGui:add(name, parent, cl)
 end
 function vGui:create(name, parent, cl)
     assert(istable(ELEMENTS[string.lower(name)]), name .. " is not element")
-    local el = ELEMENTS[string.lower(name)]:new()
+    local el = ELEMENTS[string.lower(name)]:new(self)
     if parent then parent:addChild(el) end
     if cl then cl(el) end
     return el

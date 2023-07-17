@@ -50,7 +50,7 @@ function PANEL:addSpacer( strText, funcFunction )
 	local pnl = self:add( "shape" )
 	pnl.paint = function( self, x, y, w, h )
         render.setColor(Color(51,51,51,200))
-		render.drawRect(x,y,w,h)
+		render.drawRectFast(x,y,w,h)
 	end
     pnl:setW(self:getW())
 	pnl:setH( 4 )
@@ -61,9 +61,9 @@ end
 
 function PANEL:open( x, y, skipanimation, ownerpanel )
     self:setPos( x, y )
-    
-    self:getParent():moveToFront(self)
-
+    if self:getParent() then
+        self:getParent():moveToFront(self)
+    end
 	self:setSize( self:getWide(), 0 )
     self:setVisible(true)
     self:setEnabled(true)

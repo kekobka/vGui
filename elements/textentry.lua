@@ -64,7 +64,7 @@ function element:paint(x, y, w, h)
         render.drawRoundedBoxEx(self:getRadius(), x, y, w, h, rTL, rTR, rBL, rBR)
     else
         render.setColor(self:getColorFromScheme("bg"))
-        render.drawRect(x, y, w, h)
+        render.drawRectFast(x, y, w, h)
         
         render.setColor(self:getColorFromScheme("border"))
         render.drawRectOutline(x, y, w, h,2)

@@ -46,6 +46,9 @@ function element:initialize(gui)
     self._tabs = {}
     self._tabsoffsetW = 0
     self._activetab = nil
+    local w,h = self.gui:getResolution()
+    self:setSize(w/2,h/2)
+    -- self:center()
 end
 function element:dockPadding(q,w,e,r)
     self._dockPadding = {q,33+w,e,r}
